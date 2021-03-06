@@ -1,0 +1,16 @@
+from django.db import models
+
+# Create your models here.
+class Pinguer(models.Model):
+    name = models.CharField(max_length=128)
+    ipAddress = models.CharField(max_length=128)
+    active = models.BooleanField(default=False)
+
+class PinguerEvent(models.Model):
+    EVENT_TYPE = [
+    (1, 'Activation'),
+    (2, 'Deactivation'),
+    ]
+    pinguer=models.ForeignKey(Pinguer, on_delete=models.CASCADE )
+    event_type = models.IntegerField(choices=EVENT_TYPE)
+    event_date = models.DateTimeField()
